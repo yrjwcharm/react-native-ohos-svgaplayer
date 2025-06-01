@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
 
 **3、接下来使用 DevEco Studio 打开项目里的 HarmonyOS 工程 `harmony`**
 
- * I.在工程根目录的 `oh-package.json5` 添加 overrides 字段 
+ * 1.在工程根目录的 `oh-package.json5` 添加 overrides 字段 
 
   ```json
   {
@@ -85,9 +85,8 @@ const styles = StyleSheet.create({
     }
   }
   ```
-
  * 2.引入原生端代码 ，目前有两种方法：
- 
+
     * 1. 通过 har 包引入（在 IDE 完善相关功能后该方法会被遗弃，目前首选此方法）；
     * 2. 直接链接源码。
 
