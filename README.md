@@ -197,6 +197,10 @@ ohpm install
 
 ## 兼容三端[Android、iOS、Harmony]的 Svga动画 demo示例 ->  https://github.com/yrjwcharm/react-native-ohos/tree/feature/rnoh/svgaplayer
 
+#### 开源不易，希望您可以动一动小手点点小⭐⭐
+
+#### 👴希望大家如有好的需求踊跃提交,如有问题请前往github提交issue，空闲时间会扩充与修复优化
+
 
 ## 开源协议
 
