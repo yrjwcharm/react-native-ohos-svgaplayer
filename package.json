@@ -3,6 +3,11 @@
   "bugs": {
     "url": "https://github.com/yrjwcharm/react-native-ohos-svgaplayer/issues"
   },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "dependencies": {},
   "description": "这是一款加载harmonyOS Svga动画的react-native开源插件",
   "devDependencies": {
@@ -48,10 +53,10 @@
     "alias": "react-native-svga-player",
     "codegenConfig": [
       {
-        "version": 1,
         "specPaths": [
           "./src"
-        ]
+        ],
+        "version": 1
       }
     ]
   },
