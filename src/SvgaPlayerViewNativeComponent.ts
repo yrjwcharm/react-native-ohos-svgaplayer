@@ -16,14 +16,31 @@ interface SvgaPlayerProps extends ViewProps {
 }
 type NativeType = HostComponent<SvgaPlayerProps>;
 interface NativeCommands {
-  emitNativeEvent: (
+  load: (viewRef: React.ElementRef<NativeType>, source: string) => void;
+  startAnimation: (viewRef: React.ElementRef<NativeType>) => void;
+  pauseAnimation: (viewRef: React.ElementRef<NativeType>) => void;
+  stopAnimation: (viewRef: React.ElementRef<NativeType>) => void;
+  stepToFrame: (
     viewRef: React.ElementRef<NativeType>,
-    mutil: boolean,
+    toFrame: Float,
+    andPlay: boolean,
+  ) => void;
+  stepToPercentage: (
+    viewRef: React.ElementRef<NativeType>,
+    toPercentage: Float,
+    andPlay: boolean,
   ) => void;
 }
 
 export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
-  supportedCommands: ['emitNativeEvent'],
+  supportedCommands: [
+    'load',
+    'startAnimation',
+    'pauseAnimation',
+    'stopAnimation',
+    'stepToFrame',
+    'stepToPercentage',
+  ],
 });
 
 export default codegenNativeComponent<SvgaPlayerProps>(

@@ -37,10 +37,25 @@ export struct SvgaPlayerView {
         this.onDescriptorWrapperChange(new RNC.SvgaPlayerView.DescriptorWrapper(descriptor));
       }
     ))
-    this.cleanUpCallbacks.push(new RNC.SvgaPlayerView.CommandReceiver(this.ctx.componentCommandReceiver,
-      this.tag).subscribe("emitNativeEvent", (argv) => {
-      console.log(`收到 RN 传来的消息 ================ ${JSON.stringify(argv)}`);
-      // this.mutil = argv[0] || false;
+    const receiver:RNC.SvgaPlayerView.CommandReceiver = new RNC.SvgaPlayerView.CommandReceiver(this.ctx.componentCommandReceiver,
+      this.tag)
+    this.cleanUpCallbacks.push(receiver.subscribe("load", (params) => {
+      this.controller.load(params[0],true);
+    }))
+    this.cleanUpCallbacks.push(receiver.subscribe("startAnimation", () => {
+      this.controller.startAnimation();
+    }))
+    this.cleanUpCallbacks.push(receiver.subscribe("pauseAnimation", () => {
+      this.controller.pauseAnimation();
+    }))
+    this.cleanUpCallbacks.push(receiver.subscribe("stopAnimation", () => {
+      this.controller.stopAnimation(true);
+    }))
+    this.cleanUpCallbacks.push(receiver.subscribe("stepToFrame", (params) => {
+      this.controller.stepToFrame(params[0],params[1]);
+    }))
+    this.cleanUpCallbacks.push(receiver.subscribe("stepToPercentage", (params) => {
+      this.controller.stepToPercentage(params[0],params[1]);
     }))
     // 播放完成回调
    this. controller.onFinished(() => {
