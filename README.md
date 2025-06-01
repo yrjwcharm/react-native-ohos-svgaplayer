@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
 
 **3、接下来使用 DevEco Studio 打开项目里的 HarmonyOS 工程 `harmony`**
 
-  * 1.在工程根目录的 `oh-package.json5` 添加 overrides 字段 
+ * I.在工程根目录的 `oh-package.json5` 添加 overrides 字段 
 
   ```json
   {
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   }
   ```
 
-  * 2.引入原生端代码
+ * 2.引入原生端代码
 
   目前有两种方法：
 
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     }
   ```
 
-  打开 `entry/src/main/cpp/PackageProvider.cpp`，添加：
+* 3.打开 `entry/src/main/cpp/PackageProvider.cpp`，添加：
 
   ```diff
   #include "RNOH/PackageProvider.h"
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   }
   ```
 
-## 在 ArkTs 侧引入 SvgaPlayerView 组件
+* 4.在 ArkTs 侧引入 SvgaPlayerView 组件
 
 找到 **function buildCustomRNComponent()**，一般位于 `entry/src/main/ets/pages/index.ets` 或 `entry/src/main/ets/rn/LoadBundle.ets`，添加：
 
@@ -169,7 +169,7 @@ export function buildCustomRNComponent(ctx: ComponentBuilderContext) {
 
 ```
 
-> [!TIP] 本库使用了混合方案，需要添加组件名。
+* 5. > [!TIP] 本库使用了混合方案，需要添加组件名。
 
 在`entry/src/main/ets/pages/index.ets` 或 `entry/src/main/ets/rn/LoadBundle.ets` 找到常量 `arkTsComponentNames` 在其数组里添加组件名
 
