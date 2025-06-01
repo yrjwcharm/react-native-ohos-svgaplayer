@@ -1,5 +1,5 @@
 ## ***这是一款使用ReactNative 加载`HarmonyOS` Svga动画的视频播放器插件***
-> 版本：v1.0.9
+> 版本：v1.1.0
 
 <p align="center">
   <h1 align="center"> <code>react-native-ohos-svgaplayer</code> </h1>
@@ -199,7 +199,7 @@ ohpm install
 
 #### 开源不易，希望您可以动一动小手点点小⭐⭐
 
-#### 👴希望大家如有好的需求踊跃提交,如有问题请前往github提交issue，空闲时间会扩充与修复优化
+#### 👴希望大家如有好的需求踊跃提交,如有问题请提交issue，空闲时间会扩充与修复优化
 
 
 ## 开源协议
