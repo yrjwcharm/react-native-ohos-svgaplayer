@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
   },
 });
 ```
-
 ## Link
 
 目前 HarmonyOS 暂不支持 AutoLink，所以 Link 步骤需要手动配置。
