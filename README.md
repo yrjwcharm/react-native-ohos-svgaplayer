@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
 
   ```json
   "dependencies": {
-      "@rnoh/react-native-openharmony": "file:../react_native_openharmony",
+      "@rnoh/react-native-openharmony": "file:../libs/react_native_openharmony_release.har",//这个你项目工程怎么引入的就怎么引入
       "@react-native-ohos/react-native-svga-player": "file:../svgaplayer",
 
     }
