@@ -1,4 +1,4 @@
 // index.ts
-import RNSvgaPlayer from './SvgaPlayerViewNativeComponent';
+import RNSvgaPlayer from './RNSvgaPlayer';
 
 export default RNSvgaPlayer;

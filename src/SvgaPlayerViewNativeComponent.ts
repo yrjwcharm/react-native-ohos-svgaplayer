@@ -8,14 +8,14 @@ import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNati
 interface ICallbacks {
   value: Float;
 }
-interface SvgaPlayerProps extends ViewProps {
+export interface SvgaPlayerProps extends ViewProps {
   source: string;
   onFinished?: DirectEventHandler<{}>;
   onFrame?: DirectEventHandler<ICallbacks>;
   onPercentage?: DirectEventHandler<ICallbacks>;
 }
 type NativeType = HostComponent<SvgaPlayerProps>;
-interface NativeCommands {
+export interface NativeCommands {
   load: (viewRef: React.ElementRef<NativeType>, source: string) => void;
   startAnimation: (viewRef: React.ElementRef<NativeType>) => void;
   pauseAnimation: (viewRef: React.ElementRef<NativeType>) => void;
