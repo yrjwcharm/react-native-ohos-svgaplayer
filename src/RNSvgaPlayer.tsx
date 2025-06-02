@@ -1,7 +1,7 @@
 import React, {forwardRef, useRef} from 'react';
 import SvgaPlayerView, {
-  SvgaPlayerProps,
-} from './SvgaPlayerNativeComponent';
+  type SvgaPlayerProps,
+} from './SvgaPlayerViewNativeComponent';
 export type GeneratedSampleComponentRef = {
   load: (source: string) => void;
   startAnimation: () => void;
