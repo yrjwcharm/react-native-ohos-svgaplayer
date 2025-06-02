@@ -1,5 +1,5 @@
 ## ***这是一款使用ReactNative 加载`HarmonyOS` Svga动画的播放器插件*** [三端Svga动画统一使用点击这里](https://github.com/yrjwcharm/react-native-ohos/tree/feature/rnoh/svgaplayer)
-> ### 版本：v1.1.2
+> ### 版本：v1.1.5
 
 <p align="center">
   <h1 align="center"> <code>react-native-ohos-svgaplayer</code> </h1>
