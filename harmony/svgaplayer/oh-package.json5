@@ -1,8 +1,9 @@
 {
   "name": "@react-native-ohos/react-native-svga-player",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Please describe the basic information.",
   "main": "Index.ets",
+  "obfuscated": false,
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {

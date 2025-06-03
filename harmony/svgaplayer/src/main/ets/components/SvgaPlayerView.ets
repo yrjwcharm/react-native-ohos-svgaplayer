@@ -51,7 +51,7 @@ export struct SvgaPlayerView {
     //     new SelectItems(item.id, item.text, value.includes(item.id))
     //   )
     // }
-    this.source = this.descriptorWrapper.props?.source;
+    this.source = this.descriptorWrapper.props.source;
   }
 
   aboutToDisappear() {
