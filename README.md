@@ -36,7 +36,7 @@ import React from "react";
 import { View, Dimensions, StyleSheet } from "react-native";
 import RNSvgaPlayer from 'react-native-svga-player'
 
-export function PdfExample() {
+export function App() {
   // const source = { uri: 'https://www-file.huawei.com/minisite/media/annual_report/annual_report_2022_cn.pdf', cache: true };
   const source = require("../assets/test.pdf");
 
