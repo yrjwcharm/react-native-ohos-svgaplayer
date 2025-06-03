@@ -1,13 +1,12 @@
 {
-  "name": "@react-native-ohos/react-native-svga-player",
-  "version": "1.0.5",
+  "name": "@react-native-oh-tpl/react-native-svga-player",
+  "version": "1.0.0",
   "description": "Please describe the basic information.",
   "main": "Index.ets",
-  "obfuscated": false,
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@rnoh/react-native-openharmony": "0.72.48",
+    "@rnoh/react-native-openharmony": "file:../libs/react_native_openharmony_release.har",
     "@tb-open/svga": "^1.3.4"
 
   }
