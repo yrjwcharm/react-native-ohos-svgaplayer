@@ -8,11 +8,6 @@
       "@commitlint/config-conventional"
     ]
   },
-  "create-react-native-library": {
-    "languages": "kotlin-objc",
-    "type": "fabric-view",
-    "version": "0.50.3"
-  },
   "dependencies": {},
   "description": "这是一款加载harmonyOS Svga动画的react-native开源插件",
   "devDependencies": {
@@ -55,7 +50,15 @@
     "src"
   ],
   "harmony": {
-    "alias": "react-native-svga-player"
+    "alias": "react-native-svga-player",
+    "codegenConfig": [
+      {
+        "version": 1,
+        "specPaths": [
+          "./src"
+        ]
+      }
+    ]
   },
   "homepage": "https://github.com/yrjwcharm/react-native-svga-player#readme",
   "jest": {
