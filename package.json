@@ -55,15 +55,7 @@
     "src"
   ],
   "harmony": {
-    "alias": "react-native-svga-player",
-    "codegenConfig": [
-      {
-        "specPaths": [
-          "./src"
-        ],
-        "version": 1
-      }
-    ]
+    "alias": "react-native-svga-player"
   },
   "homepage": "https://github.com/yrjwcharm/react-native-svga-player#readme",
   "jest": {
@@ -144,7 +136,7 @@
     "typecheck": "tsc"
   },
   "types": "./lib/index.d.ts",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "workspaces": [
     "example"
   ]
