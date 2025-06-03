@@ -1,6 +1,6 @@
 {
   "name":"react-native-ohos-svgaplayer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "这是一款加载harmonyOS Svga动画的react-native开源插件",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
