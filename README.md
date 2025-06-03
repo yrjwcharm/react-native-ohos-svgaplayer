@@ -9,7 +9,7 @@
     </a>
 </p>
 
-> [!TIP] [Github 地址](https://github.com/yrjwcharm/react-native-ohos-svgaplayer)
+> [!TIP] [Github 地址](https://github.com/yrjwcharm/react-native-svga-player)
 
 ## 安装与使用
 
