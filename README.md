@@ -1,11 +1,11 @@
-# @react-native-oh-tpl/react-native-svga-player
+# @yrjwcharm/react-native-svga-player
 
 这是一款加载harmony svga动画的rn开源插件
 
 ## Installation
 
 ```sh
-npm install @react-native-oh-tpl/react-native-svga-player
+npm install @yrjwcharm/react-native-svga-player
 ```
 
 ## Usage
