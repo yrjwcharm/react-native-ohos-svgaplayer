@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/yrjwcharm/react-native-svga-player#readme",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com/"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.6.0",
