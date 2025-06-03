@@ -1,6 +1,6 @@
 {
   "name":"react-native-ohos-svgaplayer",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "这是一款加载harmonyOS Svga动画的react-native开源插件",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -22,7 +22,9 @@
     "example": "yarn workspace @yrjwcharm/react-native-svga-player-example",
     "test": "jest",
     "typecheck": "tsc",
-    "lint": "eslint \"**/*.{js,ts,tsx}\""
+    "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "codegen-lib": "react-native codegen-lib-harmony --no-safety-check --npm-package-name react-native-ohos-svgaplayer --cpp-output-path ./harmony/svgaplayer/src/main/cpp/generated --ets-output-path ./harmony/svgaplayer/src/main/ets/generated --turbo-modules-spec-paths ./src  --arkts-components-spec-paths ./src"
+
   },
   "keywords": [
     "react-native",
@@ -133,15 +135,7 @@
     ]
   },
   "harmony": {
-    "alias": "react-native-svga-player",
-    "codegenConfig": [
-      {
-        "version": 1,
-        "specPaths": [
-          "./src"
-        ]
-      }
-    ]
+    "alias": "react-native-svga-player"
   },
   "create-react-native-library": {
     "languages": "kotlin-objc",
