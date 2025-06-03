@@ -11,7 +11,7 @@ import { SvgaPlayerV2, SvgaController } from '@tb-open/svga';
 
 @Component
 export struct SvgaPlayerView {
-  public static readonly NAME = RNC.SvgaPlayerView.NAME;
+  public static readonly NAME:string = RNC.SvgaPlayerView.NAME;
   private controller: SvgaController = new SvgaController({
     loops: Infinity,                    // 播放3次
     fillMode: 'forwards',        // 播放结束后停留在最后一帧
@@ -35,7 +35,7 @@ export struct SvgaPlayerView {
       }
     ))
     this.cleanUpCallbacks.push(new RNC.SvgaPlayerView.CommandReceiver(this.ctx.componentCommandReceiver,
-      this.tag).subscribe("emitNativeEvent", (argv) => {
+      this.tag).subscribe("emitNativeEvent", (argv:boolean[]) => {
       console.log(`收到 RN 传来的消息 ================ ${JSON.stringify(argv)}`);
       // this.mutil = argv[0] || false;
     }))
@@ -51,7 +51,7 @@ export struct SvgaPlayerView {
     //     new SelectItems(item.id, item.text, value.includes(item.id))
     //   )
     // }
-    this.source = this.descriptorWrapper.props.source;
+    this.source = this.descriptorWrapper.props?.source;
   }
 
   aboutToDisappear() {

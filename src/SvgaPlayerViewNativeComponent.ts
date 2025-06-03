@@ -3,7 +3,7 @@ import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativ
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 
 interface SvgaPlayerProps extends ViewProps {
-  url: string;
+  source: string;
 }
 type NativeType = HostComponent<SvgaPlayerProps>;
 interface NativeCommands {
