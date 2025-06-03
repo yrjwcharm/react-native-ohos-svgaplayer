@@ -232,6 +232,7 @@ ohpm install
 
 > [!TIP] "HarmonyOS Support"列为 yes 表示 HarmonyOS 平台支持该属性；no 则表示不支持；partially 表示部分支持。使用方法跨平台一致，效果对标 iOS 或 Android 的效果。
 
+#### Example demo示例 ->  https://github.com/yrjwcharm/react-native-ohos/tree/feature/rnoh/svgaplayer
 
 ## 其他
 
