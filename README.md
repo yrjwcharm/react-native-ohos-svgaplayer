@@ -12,11 +12,16 @@ npm install @react-native-oh-tpl/react-native-svga-player
 
 
 ```js
-import { ReactNativeSvgaPlayerView } from "@react-native-oh-tpl/react-native-svga-player";
+import { RNSvgaPlayer } from "@react-native-oh-tpl/react-native-svga-player";
 
 // ...
-
-<ReactNativeSvgaPlayerView color="tomato" />
+<RNSvgaPlayer
+        source="https://raw.githubusercontent.com/yyued/SVGAPlayer-iOS/master/SVGAPlayer/Samples/Goddess.svga"
+        style={{
+          width: 300,
+          height: 150,
+        }}
+      />
 ```
 
 
