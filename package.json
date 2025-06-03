@@ -1,47 +1,20 @@
 {
-  "name":"react-native-ohos-svgaplayer",
-  "version": "1.0.8",
-  "description": "这是一款加载harmonyOS Svga动画的react-native开源插件",
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
-  "exports": {
-    ".": {
-      "source": "./src/index.tsx",
-      "types": "./src/index.d.ts",
-      "default": "./lib/index.js"
-    },
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "src",
-    "lib",
-    "harmony"
-  ],
-  "dependencies": {},
-  "scripts": {
-    "example": "yarn workspace @yrjwcharm/react-native-svga-player-example",
-    "test": "jest",
-    "typecheck": "tsc",
-    "lint": "eslint \"**/*.{js,ts,tsx}\""
-  },
-  "keywords": [
-    "react-native",
-    "fabric",
-    "harmony",
-    "svga",
-    "ohos",
-    "SvgaPlayer"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yrjwcharm/react-native-svga-player.git"
-  },
   "author": "yanruifeng <xlyanrui@sina.com> (https://github.com/yrjwcharm)",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/yrjwcharm/react-native-svga-player/issues"
   },
-  "homepage": "https://github.com/yrjwcharm/react-native-svga-player#readme",
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "create-react-native-library": {
+    "languages": "kotlin-objc",
+    "type": "fabric-view",
+    "version": "0.50.3"
+  },
+  "dependencies": {},
+  "description": "这是一款加载harmonyOS Svga动画的react-native开源插件",
   "devDependencies": {
     "@commitlint/config-conventional": "^19.6.0",
     "@eslint/compat": "^1.2.7",
@@ -68,44 +41,53 @@
     "turbo": "^1.10.7",
     "typescript": "^5.8.3"
   },
-  "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
+  "exports": {
+    ".": {
+      "default": "./lib/index.js",
+      "source": "./src/index.tsx",
+      "types": "./src/index.d.ts"
+    },
+    "./package.json": "./package.json"
   },
-  "workspaces": [
-    "example"
+  "files": [
+    "harmony",
+    "lib",
+    "src"
   ],
-  "packageManager": "yarn@3.6.1",
+  "harmony": {
+    "alias": "react-native-svga-player",
+    "codegenConfig": [
+      {
+        "specPaths": [
+          "./src"
+        ],
+        "version": 1
+      }
+    ]
+  },
+  "homepage": "https://github.com/yrjwcharm/react-native-svga-player#readme",
   "jest": {
-    "preset": "react-native",
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
-    ]
+    ],
+    "preset": "react-native"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release ${version}",
-      "tagName": "v${version}"
-    },
-    "npm": {
-      "publish": true
-    },
-    "github": {
-      "release": true
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": {
-          "name": "angular"
-        }
-      }
-    }
+  "keywords": [
+    "fabric",
+    "harmony",
+    "ohos",
+    "react-native",
+    "svga",
+    "SvgaPlayer"
+  ],
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "name": "react-native-ohos-svgaplayer",
+  "packageManager": "yarn@3.6.1",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
   },
   "prettier": {
     "quoteProps": "consistent",
@@ -115,29 +97,55 @@
     "useTabs": false
   },
   "react-native-builder-bob": {
-    "source": "src",
     "output": "lib",
+    "source": "src",
     "targets": [
       [
-        "module",
         {
           "esm": true
-        }
+        },
+        "module"
       ],
       [
-        "typescript",
         {
           "project": "tsconfig.build.json"
-        }
+        },
+        "typescript"
       ]
     ]
   },
-  "harmony": {
-    "alias": "react-native-svga-player"
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": {
+          "name": "angular"
+        }
+      }
+    }
   },
-  "create-react-native-library": {
-    "languages": "kotlin-objc",
-    "type": "fabric-view",
-    "version": "0.50.3"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yrjwcharm/react-native-svga-player.git"
+  },
+  "scripts": {
+    "example": "yarn workspace @yrjwcharm/react-native-svga-player-example",
+    "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "test": "jest",
+    "typecheck": "tsc"
+  },
+  "types": "./lib/index.d.ts",
+  "version": "1.0.8",
+  "workspaces": [
+    "example"
+  ]
 }
