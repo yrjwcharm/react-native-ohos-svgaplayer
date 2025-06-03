@@ -1,18 +1,18 @@
-# @yrjwcharm/react-native-svga-player
+# react-native-ohos-svgaplayer
 
 这是一款加载harmony svga动画的rn开源插件
 
 ## Installation
 
 ```sh
-npm install @yrjwcharm/react-native-svga-player
+npm install react-native-ohos-svgaplayer
 ```
 
 ## Usage
 
 
 ```js
-import { RNSvgaPlayer } from "@react-native-oh-tpl/react-native-svga-player";
+import { RNSvgaPlayer } from "react-native-ohos-svgaplayer";
 
 // ...
 <RNSvgaPlayer
