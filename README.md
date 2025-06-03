@@ -64,7 +64,25 @@ const styles = StyleSheet.create({
 
 目前 HarmonyOS 暂不支持 AutoLink，所以 Link 步骤需要手动配置。
 
-首先需要使用 DevEco Studio 打开项目里的 HarmonyOS 工程 `harmony`
+1、** 执行 package.json里的 codegen脚本命令 yarn codegen**
+
+```json
+  "scripts": {
+    "android": "react-native run-android",
+    "bundle-harmony": "react-native bundle-harmony --dev=false --minify=true --entry-file index.js --bundle-output ./harmony/entry/src/main/resources/rawfile/bundle.harmony.js",
+    `"codegen": "react-native codegen-harmony --cpp-output-path ./harmony/entry/src/main/cpp/generated --rnoh-module-path ./harmony/entry/oh_modules/@rnoh/react-native-openharmony --no-safety-check"`,
+    "harmony": "hdc rport tcp:8081 tcp:8081 && npm run start",
+    "ios": "react-native run-ios",
+    "lint": "eslint .",
+    "postinstall": "patch-package",
+    "start": "react-native start",
+    "test": "jest"
+  }
+```
+
+### 2.执行完codegen以后 会在 harmony工程 entry/src/main/cpp/generated下生成对应的头文件，该库默认有三个文件，特别注意生成的RNOHGeneratedPackage.h文件
+
+3、接下来使用 DevEco Studio 打开项目里的 HarmonyOS 工程 `harmony`
 
 ### 1.在工程根目录的 `oh-package.json5` 添加 overrides 字段
 
@@ -81,8 +99,8 @@ const styles = StyleSheet.create({
 
 目前有两种方法：
 
-1. 通过 har 包引入（在 IDE 完善相关功能后该方法会被遗弃，目前首选此方法）；
-2. 直接链接源码。
+* 1. 通过 har 包引入（在 IDE 完善相关功能后该方法会被遗弃，目前首选此方法）；
+* 2. 直接链接源码。
 
 方法一：通过 har 包引入（推荐）
 
@@ -111,45 +129,6 @@ ohpm install
 
 > [!TIP] 如需使用直接链接源码，请参考[直接链接源码说明](/zh-cn/link-source-code.md)
 
-### 3.配置 CMakeLists 和引入 PdfViewPackage
-
-打开 `entry/src/main/cpp/CMakeLists.txt`，添加：
-
-```diff
-project(rnapp)
-cmake_minimum_required(VERSION 3.4.1)
-set(CMAKE_SKIP_BUILD_RPATH TRUE)
-set(RNOH_APP_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-set(NODE_MODULES "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../node_modules")
-+ set(OH_MODULES "${CMAKE_CURRENT_SOURCE_DIR}/../../../oh_modules")
-set(RNOH_CPP_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../react-native-harmony/harmony/cpp")
-set(LOG_VERBOSITY_LEVEL 1)
-set(CMAKE_ASM_FLAGS "-Wno-error=unused-command-line-argument -Qunused-arguments")
-set(CMAKE_CXX_FLAGS "-fstack-protector-strong -Wl,-z,relro,-z,now,-z,noexecstack -s -fPIE -pie")
-set(WITH_HITRACE_SYSTRACE 1) # for other CMakeLists.txt files to use
-add_compile_definitions(WITH_HITRACE_SYSTRACE)
-
-add_subdirectory("${RNOH_CPP_DIR}" ./rn)
-
-# RNOH_BEGIN: manual_package_linking_1
-add_subdirectory("../../../../sample_package/src/main/cpp" ./sample-package)
-+ add_subdirectory("${OH_MODULES}/@react-native-oh-tpl/react-native-pdf/src/main/cpp" ./pdfview)
-# RNOH_END: manual_package_linking_1
-
-file(GLOB GENERATED_CPP_FILES "./generated/*.cpp")
-
-add_library(rnoh_app SHARED
-    ${GENERATED_CPP_FILES}
-    "./PackageProvider.cpp"
-    "${RNOH_CPP_DIR}/RNOHAppNapiBridge.cpp"
-)
-target_link_libraries(rnoh_app PUBLIC rnoh)
-
-# RNOH_BEGIN: manual_package_linking_2
-target_link_libraries(rnoh_app PUBLIC rnoh_sample_package)
-+ target_link_libraries(rnoh_app PUBLIC rnoh_pdf_view)
-# RNOH_END: manual_package_linking_2
-```
 
 打开 `entry/src/main/cpp/PackageProvider.cpp`，添加：
 
@@ -169,7 +148,7 @@ std::vector<std::shared_ptr<Package>> PackageProvider::getPackages(Package::Cont
 }
 ```
 
-### 4.在 ArkTs 侧引入 SvgaPlayerView 组件
+### 3.在 ArkTs 侧引入 SvgaPlayerView 组件
 
 找到 **function buildCustomRNComponent()**，一般位于 `entry/src/main/ets/pages/index.ets` 或 `entry/src/main/ets/rn/LoadBundle.ets`，添加：
 
@@ -205,7 +184,7 @@ const arkTsComponentNames: Array<string> = [
   ];
 ```
 
-### 5.运行
+### 4.运行
 
 点击右上角的 `sync` 按钮
 
