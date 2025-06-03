@@ -1,5 +1,5 @@
 {
-  "name": "@react-native-oh-tpl/react-native-svga-player",
+  "name": "@yrjwcharm/react-native-ohos-svgaplayer",
   "version": "0.1.0",
   "description": "这是一款加载harmony svga动画的rn开源插件",
   "main": "./lib/module/index.js",
