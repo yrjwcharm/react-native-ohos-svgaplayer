@@ -1,4 +1,5 @@
-> 模板版本：v1.0.9
+***这是一款使用ReactNative 加载HarmonyOS Svga动画的视频播放器插件***
+> 版本：v1.0.9
 
 <p align="center">
   <h1 align="center"> <code>react-native-ohos-svgaplayer</code> </h1>
