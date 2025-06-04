@@ -38,9 +38,6 @@ import { View, Dimensions, StyleSheet } from "react-native";
 import RNSvgaPlayer from 'react-native-svga-player'
 
 export function App() {
-  // const source = { uri: 'https://www-file.huawei.com/minisite/media/annual_report/annual_report_2022_cn.pdf', cache: true };
-  const source = require("../assets/test.pdf");
-
   return (
    <RNSvgaPlayer
     source="https://raw.githubusercontent.com/yyued/SVGAPlayer-iOS/master/SVGAPlayer/Samples/Goddess.svga"
@@ -65,27 +62,19 @@ const styles = StyleSheet.create({
 
 目前 HarmonyOS 暂不支持 AutoLink，所以 Link 步骤需要手动配置。
 
-1、** 执行 package.json里的 codegen脚本命令 yarn codegen**
+**1、执行 package.json里的 codegen脚本命令 yarn codegen**
 
-```json
+```js
   "scripts": {
-    "android": "react-native run-android",
-    "bundle-harmony": "react-native bundle-harmony --dev=false --minify=true --entry-file index.js --bundle-output ./harmony/entry/src/main/resources/rawfile/bundle.harmony.js",
-    `"codegen": "react-native codegen-harmony --cpp-output-path ./harmony/entry/src/main/cpp/generated --rnoh-module-path ./harmony/entry/oh_modules/@rnoh/react-native-openharmony --no-safety-check"`,
-    "harmony": "hdc rport tcp:8081 tcp:8081 && npm run start",
-    "ios": "react-native run-ios",
-    "lint": "eslint .",
-    "postinstall": "patch-package",
-    "start": "react-native start",
-    "test": "jest"
+    "codegen": "react-native codegen-harmony --cpp-output-path ./harmony/entry/src/main/cpp/generated --rnoh-module-path ./harmony/entry/oh_modules/@rnoh/react-native-openharmony --no-safety-check"
   }
 ```
 
-### 2.执行完codegen以后 会在 harmony工程 entry/src/main/cpp/generated下生成对应的头文件，该库默认有三个文件，特别注意生成的RNOHGeneratedPackage.h文件
+**2.执行完codegen以后 会在 harmony工程 entry/src/main/cpp/generated下生成对应的头文件，该库默认有三个文件，特别注意生成的RNOHGeneratedPackage.h文件**
 
-3、接下来使用 DevEco Studio 打开项目里的 HarmonyOS 工程 `harmony`
+**3、接下来使用 DevEco Studio 打开项目里的 HarmonyOS 工程 `harmony`**
 
-### 1.在工程根目录的 `oh-package.json5` 添加 overrides 字段
+* 1.在工程根目录的 `oh-package.json5` 添加 overrides 字段
 
 ```json
 {
@@ -96,12 +85,12 @@ const styles = StyleSheet.create({
 }
 ```
 
-### 2.引入原生端代码
+* 2.引入原生端代码
 
 目前有两种方法：
 
-* 1. 通过 har 包引入（在 IDE 完善相关功能后该方法会被遗弃，目前首选此方法）；
-* 2. 直接链接源码。
+  - 1. 通过 har 包引入（在 IDE 完善相关功能后该方法会被遗弃，目前首选此方法）；
+  - 2. 直接链接源码。
 
 方法一：通过 har 包引入（推荐）
 
@@ -198,21 +187,9 @@ ohpm install
 
 然后编译、运行即可。
 
-## 约束与限制
+####  兼容三端[Android、iOS、Harmony]的 demo示例 ->  https://github.com/yrjwcharm/react-native-ohos/tree/feature/rnoh/svgaplayer
 
-### 兼容性
 
-要使用此库，需要使用正确的 React-Native 和 RNOH 版本。另外，还需要使用配套的 DevEco Studio 和 手机 ROM。
-
-请到三方库相应的 Releases 发布地址查看 Release 配套的版本信息：[react-native-ohos-svgaplayer Releases](https://github.com/yrjwcharm/react-native-ohos-svgaplayer/releases)
-
-## 属性
-
-> [!TIP] "Platform"列表示该属性在原三方库上支持的平台。
-
-> [!TIP] "HarmonyOS Support"列为 yes 表示 HarmonyOS 平台支持该属性；no 则表示不支持；partially 表示部分支持。使用方法跨平台一致，效果对标 iOS 或 Android 的效果。
-
-#### Example demo示例 ->  https://github.com/yrjwcharm/react-native-ohos/tree/feature/rnoh/svgaplayer
 
 ## 其他
 
