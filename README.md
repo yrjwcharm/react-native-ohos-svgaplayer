@@ -1,4 +1,4 @@
-***这是一款使用ReactNative 加载HarmonyOS Svga动画的视频播放器插件***
+## [!TIP]***这是一款使用ReactNative 加载`HarmonyOS` Svga动画的视频播放器插件***
 > 版本：v1.0.9
 
 <p align="center">
