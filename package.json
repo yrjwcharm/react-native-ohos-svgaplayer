@@ -1,7 +1,7 @@
 {
   "author": "yanruifeng <xlyanrui@sina.com> (https://github.com/yrjwcharm)",
   "bugs": {
-    "url": "https://github.com/yrjwcharm/react-native-svga-player/issues"
+    "url": "https://github.com/yrjwcharm/react-native-ohos-svgaplayer/issues"
   },
   "commitlint": {
     "extends": [
@@ -60,7 +60,7 @@
       }
     ]
   },
-  "homepage": "https://github.com/yrjwcharm/react-native-svga-player#readme",
+  "homepage": "https://github.com/yrjwcharm/react-native-ohos-svgaplayer#readme",
   "jest": {
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
