@@ -57,6 +57,8 @@ const styles = StyleSheet.create({
   },
 });
 ```
+更多详情用法参考  [三端Svga动画统一使用点击这里](https://github.com/yrjwcharm/react-native-ohos/tree/feature/rnoh/svgaplayer)
+
 ## Link
 
 目前 HarmonyOS 暂不支持 AutoLink，所以 Link 步骤需要手动配置。
