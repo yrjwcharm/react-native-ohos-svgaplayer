@@ -130,16 +130,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yrjwcharm/react-native-svga-player.git"
+    "url": "git@github.com:yrjwcharm/react-native-ohos-svgaplayer.git"
   },
   "scripts": {
-    "example": "yarn workspace @yrjwcharm/react-native-svga-player-example",
+    "example": "yarn workspace @yrjwcharm/react-native-ohos-svgaplayer-example",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "test": "jest",
     "typecheck": "tsc"
   },
   "types": "./lib/index.d.ts",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "workspaces": [
     "example"
   ]
