@@ -34,7 +34,9 @@
     "react-native-builder-bob": "^0.40.8",
     "release-it": "^17.10.0",
     "turbo": "^1.10.7",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "@rnoh/react-native-harmony-cli": "npm:@react-native-oh/react-native-harmony-cli@^0.0.27"
+
   },
   "exports": {
     ".": {
@@ -50,15 +52,7 @@
     "src"
   ],
   "harmony": {
-    "alias": "react-native-svga-player",
-    "codegenConfig": [
-      {
-        "specPaths": [
-          "./src"
-        ],
-        "version": 1
-      }
-    ]
+    "alias": "react-native-svga-player"
   },
   "homepage": "https://github.com/yrjwcharm/react-native-ohos-svgaplayer#readme",
   "jest": {
@@ -136,10 +130,12 @@
     "example": "yarn workspace @yrjwcharm/react-native-ohos-svgaplayer-example",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "test": "jest",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "codegen-lib": "react-native codegen-lib-harmony --no-safety-check --npm-package-name react-native-ohos-svgaplayer --cpp-output-path ./harmony/svgaplayer/src/main/cpp/generated --ets-output-path ./harmony/svgaplayer/src/main/ets/generated --turbo-modules-spec-paths ./src  --arkts-components-spec-paths ./src"
+
   },
   "types": "./lib/index.d.ts",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "workspaces": [
     "example"
   ]
