@@ -153,7 +153,9 @@ target_link_libraries(rnoh_app PUBLIC rnoh)
 
 # RNOH_BEGIN: manual_package_linking_2
 target_link_libraries(rnoh_app PUBLIC rnoh_sample_package)
+
 + target_link_libraries(rnoh_app PUBLIC rnoh_svgaplayer)
+
 # RNOH_END: manual_package_linking_2
 ```
 
@@ -169,7 +171,8 @@ using namespace rnoh;
 std::vector<std::shared_ptr<Package>> PackageProvider::getPackages(Package::Context ctx) {
     return {
       std::make_shared<SamplePackage>(ctx),
-+     std::make_shared<SvgaPlayerPackage>(ctx)
++     std::make_shared<SvgaPlayerPackage>(ctx),
+
     };
 }
 ```
@@ -183,7 +186,7 @@ std::vector<std::shared_ptr<Package>> PackageProvider::getPackages(Package::Cont
 
 @Builder
 function buildCustomComponent(ctx: ComponentBuilderContext) {
-+ if (ctx.componentName === SvgaPlayerView.NAME) {
++  if (ctx.componentName === SvgaPlayerView.NAME) {
 +   SvgaPlayerView({
 +     ctx: ctx.rnComponentContext,
 +     tag: ctx.tag
@@ -207,7 +210,25 @@ const arkTsComponentNames: Array<string> = [
   ];
 ```
 
-### 运行
+### 5.在 ArkTs 侧引入 WebViewPackage
+
+打开 `entry/src/main/ets/RNPackagesFactory.ts`，添加：
+
+```diff
+import type {RNPackageContext, RNPackage} from 'rnoh/ts';
+import {SamplePackage} from 'rnoh-sample-package/ts';
++ import { SvgaPlayerPackage } from '@react-native-ohos/react-native-svga-player';
+
+export function createRNPackages(ctx: RNPackageContext): RNPackage[] {
+  return [
+    new SamplePackage(ctx),
++   new SvgaPlayerPackage(ctx)
+
+  ];
+}
+```
+
+### 6.运行
 
 点击右上角的 `sync` 按钮
 
