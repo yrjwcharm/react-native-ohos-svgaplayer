@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
 });
 ```
-更多详情用法参考  [三端Svga动画统一使用点击这里](https://github.com/yrjwcharm/react-native-svga-player)
+更多详情用法参考  [三端Svga动画统一使用点击这里](https://github.com/yrjwcharm/react-native-ohos/tree/feature/rnoh/svgaplayer)
 
 ## Link
 
