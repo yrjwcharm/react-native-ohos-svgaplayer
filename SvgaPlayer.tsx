@@ -43,6 +43,7 @@ export interface SvgaPlayerRef {
    * 停止动画，如果 clearsAfterStop 为 true 则清空画布
    */
   stopAnimation: () => void;
+  pauseAnimation: () => void;
 }
 
 const RNSvgaPlayer = forwardRef<SvgaPlayerRef, SvgaPlayerProps>(
@@ -70,6 +71,11 @@ const RNSvgaPlayer = forwardRef<SvgaPlayerRef, SvgaPlayerProps>(
       stopAnimation: () => {
         if (nativeRef.current) {
           Commands.stopAnimation(nativeRef.current);
+        }
+      },
+      pauseAnimation: () => {
+        if (nativeRef.current) {
+          Commands.pauseAnimation(nativeRef.current);
         }
       },
     }));
