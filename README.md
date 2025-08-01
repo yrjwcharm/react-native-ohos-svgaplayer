@@ -1,4 +1,5 @@
-## ***这是一款使用ReactNative 加载`HarmonyOS` Svga动画的播放器插件*** [三端Svga动画统一使用点击这里](https://github.com/yrjwcharm/react-native-ohos/tree/feature/rnoh/svgaplayer)
+## **_这是一款使用 ReactNative 加载`HarmonyOS` Svga 动画的播放器插件_** [三端 Svga 动画统一使用点击这里](https://github.com/yrjwcharm/react-native-ohos/tree/feature/rnoh/svgaplayer)
+
 > ### 版本：latest
 
 <p align="center">
@@ -17,7 +18,7 @@
 #### **npm**
 
 ```bash
-npm install react-native-ohos-svgaplayer  
+npm install react-native-ohos-svgaplayer
 ```
 
 #### **yarn**
@@ -30,34 +31,119 @@ yarn add react-native-ohos-svgaplayer
 
 下面的代码展示了这个库的基本使用场景：
 
-> [!WARNING] 使用时 import 的库名不变。alias: react-native-svga-player 主要是统一 android/ios import导入
+> [!WARNING] 使用时 import 的库名不变。alias: react-native-svga-player 主要是统一 android/ios import 导入
 
 ```js
-import React from "react";
-import { View, Dimensions, StyleSheet } from "react-native";
-import RNSvgaPlayer from 'react-native-svga-player'
-
-export function App() {
-  return (
-   <RNSvgaPlayer
-    source="https://raw.githubusercontent.com/yyued/SVGAPlayer-iOS/master/SVGAPlayer/Samples/Goddess.svga"
-        style={{
-          width: 300,
-          height: 150,
-        }}
-      />
+import React, { useRef, useState } from 'react';
+import {
+  Button,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import { RNSvgaPlayer, SvgaPlayerRef } from 'react-native-svga-player';
+const App = () => {
+  const svgaPlayerRef = useRef < SvgaPlayerRef > null;
+  //播放网络资源
+  const [source, setSource] = useState(
+    'https://raw.githubusercontent.com/yyued/SVGAPlayer-iOS/master/SVGAPlayer/Samples/Goddess.svga'
   );
-}
-
+  // //播放本地资源
+  // const [source, setSource] = useState(
+  //   'homePage_studyPlanner_computer_welcome.svga',
+  // );
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle={'dark-content'} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Text style={styles.welcome}>Svga</Text>
+        <RNSvgaPlayer
+          ref={svgaPlayerRef}
+          source={source}
+          autoPlay={true}
+          loops={1} // 循环次数，默认 0无限循环
+          clearsAfterStop={false} // 停止后清空画布，默认 true
+          style={styles.svgaStyle}
+          onFinished={() => {
+            console.log('播放完成');
+          }} // 播放完成回调
+          onLoaded={() => {
+            console.log('动画加载完成');
+          }}
+        />
+        <View style={styles.flexAround}>
+          <Button
+            title="开始动画"
+            onPress={() => {
+              svgaPlayerRef.current?.startAnimation();
+            }}
+          />
+          <Button
+            title="暂停动画"
+            onPress={() => {
+              // svgaPlayerRef.current?.pauseAnimation();
+            }}
+          />
+          <Button
+            title="停止动画"
+            onPress={() => {
+              svgaPlayerRef.current?.stopAnimation();
+            }}
+          />
+        </View>
+        <View style={[styles.flexAround, { marginTop: 20 }]}>
+          <Button
+            title="手动加载动画"
+            onPress={() => {
+              setSource('homePage_studyPlanner_computer_welcome.svga');
+            }}
+          />
+          <Button
+            title="指定帧开始"
+            onPress={() => {
+              // svgaPlayerRef.current?.stepToFrame(20, true);
+            }}
+          />
+          <Button
+            title="指定百分比开始"
+            onPress={() => {
+              // svgaPlayerRef.current?.stepToPercentage(1, true);
+            }}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+export default App;
 const styles = StyleSheet.create({
-   container: {
+  flexAround: { flexDirection: 'row', justifyContent: 'space-around' },
+  container: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
+  },
+  svgaStyle: {
+    width: 150,
+    height: 150,
+    marginTop: 30,
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+    marginTop: 80,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
   },
 });
 ```
-更多详情用法参考  [三端Svga动画统一使用点击这里](https://github.com/yrjwcharm/react-native-ohos/tree/feature/rnoh/svgaplayer)
+
+更多详情用法参考 [三端 Svga 动画统一使用点击这里](https://github.com/yrjwcharm/react-native-ohos/tree/feature/rnoh/svgaplayer)
 
 ## Link
 
@@ -65,56 +151,58 @@ const styles = StyleSheet.create({
 
 首先需要使用 DevEco Studio 打开项目里的 HarmonyOS 工程 `harmony`
 
- ###  1.在工程根目录的 `oh-package.json5` 添加 overrides 字段 
+### 1.在工程根目录的 `oh-package.json5` 添加 overrides 字段
 
-  ```json
-  {
-    ...
-    "overrides": {
-      "@rnoh/react-native-openharmony": "file:../libs/react_native_openharmony_release.har"
-    
-    }
+```json
+{
+  ...
+  "overrides": {
+    "@rnoh/react-native-openharmony": "file:../libs/react_native_openharmony_release.har"
+
   }
-  ```
+}
+```
+
 ### 2.引入原生端代码 ，目前有两种方法：
 
     * 1. 通过 har 包引入（在 IDE 完善相关功能后该方法会被遗弃，目前首选此方法）；
     * 2. 直接链接源码。
 
-  方法一：通过 har 包引入（推荐）
+方法一：通过 har 包引入（推荐）
 
-  > [!TIP] har 包位于三方库安装路径的 `harmony` 文件夹下。
+> [!TIP] har 包位于三方库安装路径的 `harmony` 文件夹下。
 
-  打开 `entry/oh-package.json5`，添加以下依赖
+打开 `entry/oh-package.json5`，添加以下依赖
 
-  ```json
-  "dependencies": {
-      "@rnoh/react-native-openharmony": "file:../libs/react_native_openharmony_release.har"
-      "@react-native-ohos/react-native-svga-player": "file:../../node_modules/react-native-ohos-svgaplayer/harmony/svgaplayer.har",
-    },
-  ```
+```json
+"dependencies": {
+    "@rnoh/react-native-openharmony": "file:../libs/react_native_openharmony_release.har"
+    "@react-native-ohos/react-native-svga-player": "file:../../node_modules/react-native-ohos-svgaplayer/harmony/svgaplayer.har",
+  },
+```
 
-  点击右上角的 `sync` 按钮
+点击右上角的 `sync` 按钮
 
-  或者在终端执行：
+或者在终端执行：
 
-  ```bash
-  cd entry
-  ohpm install
+```bash
+cd entry
+ohpm install
 
-  ```
+```
 
-  方法二：直接链接源码
+方法二：直接链接源码
 
-  > [!TIP] 从react-native-ohos-svga-player获取到svgaplayer源码文件，直接在harmony工程中通过File->New->Import->Import Module导入即可 主工程`entry/oh-package.json5`中添加
+> [!TIP] 从 react-native-ohos-svga-player 获取到 svgaplayer 源码文件，直接在 harmony 工程中通过 File->New->Import->Import Module 导入即可 主工程`entry/oh-package.json5`中添加
 
-  ```json
-  "dependencies": {
-      "@rnoh/react-native-openharmony": "file:../libs/react_native_openharmony_release.har"
-      "@react-native-ohos/react-native-svga-player": "file:../svgaplayer",
+```json
+"dependencies": {
+    "@rnoh/react-native-openharmony": "file:../libs/react_native_openharmony_release.har"
+    "@react-native-ohos/react-native-svga-player": "file:../svgaplayer",
 
-    }
-  ```
+  }
+```
+
 ### 3.配置 CMakeLists 和引入 SvgaPlayerPackage
 
 打开 `entry/src/main/cpp/CMakeLists.txt`，添加：
@@ -241,14 +329,10 @@ ohpm install
 
 然后编译、运行即可。
 
+#### 开源不易，希望您可以动一动小手点点小 ⭐⭐
 
-#### 开源不易，希望您可以动一动小手点点小⭐⭐
-
-#### 👴希望大家如有好的需求踊跃提交,如有问题请提交issue，空闲时间会扩充与修复优化
-
+#### 👴 希望大家如有好的需求踊跃提交,如有问题请提交 issue，空闲时间会扩充与修复优化
 
 ## 开源协议
 
 本项目基于 [The MIT License (MIT)](https://github.com/yrjwcharm/react-native-ohos-svgaplayer/blob/master/LICENSE) ，请自由地享受和参与开源。
-
-
