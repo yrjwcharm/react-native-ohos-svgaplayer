@@ -25,7 +25,6 @@
   "homepage": "https://github.com/yrjwcharm/react-native-ohos-svgaplayer#readme",
   "license": "MIT",
   "main": "./index.tsx",
-  "private": true,
   "name": "react-native-ohos-svgaplayer",
   "peerDependencies": {
     "react": "*",
