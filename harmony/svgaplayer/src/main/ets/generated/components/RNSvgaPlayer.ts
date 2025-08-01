@@ -20,7 +20,7 @@ export namespace RNSvgaPlayer {
   export const NAME = "RNSvgaPlayer" as const
 
   export interface DirectRawProps {
-    source?: string;
+    source: string;
     autoPlay?: boolean;
     loops?: number;
     clearsAfterStop?: boolean;
@@ -93,6 +93,7 @@ export namespace RNSvgaPlayer {
   export interface CommandArgvByName {
     "startAnimation": []
     "stopAnimation": []
+    "pauseAnimation": []
   }
   
   export class CommandReceiver {
