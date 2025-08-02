@@ -6,7 +6,7 @@
  */
 
 import { RNOHContext, RNViewBase } from '@rnoh/react-native-openharmony';
-import { SvgaPlayerV2, SvgaController, Logger, LogLevel } from '@tb-open/svga';
+import { SvgaPlayer, SvgaController,SvgaError, SvgaPlayerV2 } from '@tb-open/svga';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { fileIo } from '@kit.CoreFileKit';
 import { common } from '@kit.AbilityKit';
@@ -49,14 +49,17 @@ export struct SvgaPlayerView {
       this.controller.pauseAnimation();
     }))
     this.cleanUpCallbacks.push(receiver.subscribe("stopAnimation", () => {
-      this.controller.stopAnimation(true);
+      this.controller.stopAnimation(this.controller.player.clearsAfterStop);
     }))
-    // this.cleanUpCallbacks.push(receiver.subscribe("stepToFrame", (params) => {
-    //   this.controller.stepToFrame(params[0],params[1]);
-    // }))
-    // this.cleanUpCallbacks.push(receiver.subscribe("stepToPercentage", (params) => {
-    //   this.controller.stepToPercentage(params[0],params[1]);
-    // }))
+    this.cleanUpCallbacks.push(receiver.subscribe("stepToFrame", (params) => {
+      this.controller.stepToFrame(params[0],params[1]);
+    }))
+    this.cleanUpCallbacks.push(receiver.subscribe("stepToPercentage", (params) => {
+      this.controller.stepToPercentage(params[0],params[1]);
+    }))
+    this.cleanUpCallbacks.push(receiver.subscribe("startAnimationWithRange", (params) => {
+      this.controller.startAnimationWithRange({location:params[0],length:params[1]},params[2]);
+    }))
     // 播放完成回调
     this. controller.onFinished(() => {
       console.info('动画播放完成');
@@ -65,20 +68,21 @@ export struct SvgaPlayerView {
 
     // 帧变化回调
     this. controller.onFrame((frame) => {
-      console.info(`当前帧: ${frame}`);
-      // this.eventEmitter?.emit('frame',{
-      //   value:frame
-      // });
+      this.eventEmitter?.emit('frameChanged',{
+        value:frame
+      });
 
     });
 
     // 进度变化回调
     this.controller.onPercentage((percent) => {
-      console.info(`当前进度: ${percent * 100}%`);
-      // this.eventEmitter?.emit('percentage',{
-      //   value:percent
-      // });
+      this.eventEmitter?.emit('percentageChanged',{
+        value:percent
+      });
     });
+    this.controller.onError((err: SvgaError)=>{
+      this.eventEmitter?.emit('error',{error:JSON.stringify(err)});
+    })
   }
 
   private onDescriptorWrapperChange(descriptorWrapper: RNC.RNSvgaPlayer.DescriptorWrapper) {
@@ -103,7 +107,6 @@ export struct SvgaPlayerView {
     this.controller?.setLoops(loops===0?Infinity:loops);
     this.controller.player.clearsAfterStop = clearsAfterStop;
     this.controller?.load(this.url,autoPlay);
-
   }
 
   aboutToDisappear() {
@@ -133,10 +136,15 @@ export struct SvgaPlayerView {
   build() {
     RNViewBase({ ctx: this.ctx, tag: this.tag }) {
       // 声明式UI 2.0版本组件
-      SvgaPlayerV2({
-        url:  this.url,
-        controller: this.controller
-      })
+          SvgaPlayerV2({
+            url: this.url,
+            controller: this.controller,
+            onReady: () => {
+              this.eventEmitter?.emit('loaded', {} as Record<string, Object>);
+            }
+          })
+
+
       // Button("确定")
       //   .onClick(() => {
       //     const value = this.data

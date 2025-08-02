@@ -4,7 +4,6 @@ import SvgaPlayerView, {
   Commands,
   type ComponentType,
 } from './src/specs/SvgaPlayerNativeComponent';
-
 export interface SvgaErrorEvent {
   error: string;
 }
@@ -16,7 +15,7 @@ export interface SvgaPlayerProps extends ViewProps {
    */
   autoPlay?: boolean;
   /**
-   * 循环播放次数，默认 1（播放一次）
+   * 循环播放次数，默认 0（无限循环播放）
    */
   loops?: number;
   /**
@@ -32,6 +31,8 @@ export interface SvgaPlayerProps extends ViewProps {
   onError?: (event: SvgaErrorEvent) => void;
   onFinished?: () => void;
   onLoaded?: () => void;
+  onFrame?: (event: { value: number }) => void;
+  onPercentage?: (event: { value: number }) => void;
 }
 
 export interface SvgaPlayerRef {
@@ -44,6 +45,13 @@ export interface SvgaPlayerRef {
    */
   stopAnimation: () => void;
   pauseAnimation: () => void;
+  stepToFrame: (frame: number, andPlay: boolean) => void;
+  stepToPercentage: (percentage: number, andPlay: boolean) => void;
+  startAnimationWithRange: (
+    location: number,
+    length: number,
+    reverse: boolean
+  ) => void;
 }
 
 const RNSvgaPlayer = forwardRef<SvgaPlayerRef, SvgaPlayerProps>(
@@ -52,10 +60,12 @@ const RNSvgaPlayer = forwardRef<SvgaPlayerRef, SvgaPlayerProps>(
       autoPlay = true,
       loops = 0,
       clearsAfterStop = false,
-      source='',
+      source = '',
       onError,
       onFinished,
       onLoaded,
+      onFrame,
+      onPercentage,
       ...restProps
     },
     ref
@@ -78,6 +88,30 @@ const RNSvgaPlayer = forwardRef<SvgaPlayerRef, SvgaPlayerProps>(
           Commands.pauseAnimation(nativeRef.current);
         }
       },
+      stepToFrame: (frame: number, andPlay: boolean) => {
+        if (nativeRef.current) {
+          Commands.stepToFrame(nativeRef.current, frame, andPlay);
+        }
+      },
+      stepToPercentage: (frame: number, andPlay: boolean) => {
+        if (nativeRef.current) {
+          Commands.stepToPercentage(nativeRef.current, frame, andPlay);
+        }
+      },
+      startAnimationWithRange: (
+        location: number,
+        length: number,
+        reverse: boolean
+      ) => {
+        if (nativeRef.current) {
+          Commands.startAnimationWithRange(
+            nativeRef.current,
+            location,
+            length,
+            reverse
+          );
+        }
+      },
     }));
 
     return (
@@ -87,8 +121,10 @@ const RNSvgaPlayer = forwardRef<SvgaPlayerRef, SvgaPlayerProps>(
         autoPlay={autoPlay}
         loops={loops}
         clearsAfterStop={clearsAfterStop}
-        onError={(error) => onError?.(error.nativeEvent)}
+        onError={(event) => onError?.(event.nativeEvent)}
         onFinished={onFinished}
+        onFrameChanged={(event) => onFrame?.(event.nativeEvent)}
+        onPercentageChanged={(event) => onPercentage?.(event.nativeEvent)}
         onLoaded={onLoaded}
         {...restProps}
       />

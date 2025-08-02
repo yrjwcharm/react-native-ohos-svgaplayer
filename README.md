@@ -27,120 +27,42 @@ npm install react-native-ohos-svgaplayer
 yarn add react-native-ohos-svgaplayer
 ```
 
-<!-- tabs:end -->
+## API 参考
+
+### Props
+
+| 属性              | 类型                      | 默认值      | 描述                                                  |
+| ----------------- | ------------------------- | ----------- | ----------------------------------------------------- |
+| `source`          | `SvgaSource`              | -           | SVGA 文件源                                           |
+| `autoPlay`        | `boolean`                 | `true`      | 是否自动播放                                          |
+| `loops`           | `number`                  | `0`         | 循环播放次数，默认值：0 表示无限循环                  |
+| `clearsAfterStop` | `boolean`                 | `true`      | 动画停止后是否清空画布                                |
+| `fillMode`        | `'Forward' \| 'Backward'` | `'Forward'` | 填充模式：Forward 停留在最后一帧，Backward 回到第一帧 |
+| `onFinished`      | `function`                | -           | 播放完成时的回调函数                                  |
+| `onFrame`         | `function`                | -           | 帧变化时的回调函数                                    |
+| `onPercentage`    | `function`                | -           | 播放进度变化时的回调函数                              |
+
+### Ref 方法
+
+| 方法                                                 | 描述                                            |
+| ---------------------------------------------------- | ----------------------------------------------- |
+| `startAnimation()`                                   | 从第 0 帧开始播放动画                           |
+| `startAnimationWithRange(location, length, reverse)` | 在指定范围内播放动画，可选择反向播放            |
+| `pauseAnimation()`                                   | 暂停动画，停留在当前帧                          |
+| `stopAnimation()`                                    | 停止动画，根据 clearsAfterStop 决定是否清空画布 |
+| `stepToFrame(frame, andPlay)`                        | 跳转到指定帧，可选择是否从该帧开始播放          |
+| `stepToPercentage(percentage, andPlay)`              | 跳转到指定百分比位置 (0.0-1.0)，可选择是否播放  |
 
 下面的代码展示了这个库的基本使用场景：
 
 > [!WARNING] 使用时 import 的库名不变。alias: react-native-svga-player 主要是统一 android/ios import 导入
 
-```js
-import React, { useRef, useState } from 'react';
-import {
-  Button,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import { RNSvgaPlayer, SvgaPlayerRef } from 'react-native-svga-player';
-const App = () => {
-  const svgaPlayerRef = useRef < SvgaPlayerRef > null;
-  //播放网络资源
-  const [source, setSource] = useState(
-    'https://raw.githubusercontent.com/yyued/SVGAPlayer-iOS/master/SVGAPlayer/Samples/Goddess.svga'
-  );
-  // //播放本地资源
-  // const [source, setSource] = useState(
-  //   'homePage_studyPlanner_computer_welcome.svga',
-  // );
-  return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={'dark-content'} />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Text style={styles.welcome}>Svga</Text>
-        <RNSvgaPlayer
-          ref={svgaPlayerRef}
-          source={source}
-          autoPlay={true}
-          loops={1} // 循环次数，默认 0无限循环
-          clearsAfterStop={false} // 停止后清空画布，默认 true
-          style={styles.svgaStyle}
-          onFinished={() => {
-            console.log('播放完成');
-          }} // 播放完成回调
-          onLoaded={() => {
-            console.log('动画加载完成');
-          }}
-        />
-        <View style={styles.flexAround}>
-          <Button
-            title="开始动画"
-            onPress={() => {
-              svgaPlayerRef.current?.startAnimation();
-            }}
-          />
-          <Button
-            title="暂停动画"
-            onPress={() => {
-              svgaPlayerRef.current?.pauseAnimation();
-            }}
-          />
-          <Button
-            title="停止动画"
-            onPress={() => {
-              svgaPlayerRef.current?.stopAnimation();
-            }}
-          />
-        </View>
-        <View style={[styles.flexAround, { marginTop: 20 }]}>
-          <Button
-            title="手动加载动画"
-            onPress={() => {
-              setSource('homePage_studyPlanner_computer_welcome.svga');
-            }}
-          />
-          <Button
-            title="指定帧开始"
-            onPress={() => {
-              // svgaPlayerRef.current?.stepToFrame(20, true);
-            }}
-          />
-          <Button
-            title="指定百分比开始"
-            onPress={() => {
-              // svgaPlayerRef.current?.stepToPercentage(1, true);
-            }}
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
-export default App;
-const styles = StyleSheet.create({
-  flexAround: { flexDirection: 'row', justifyContent: 'space-around' },
-  container: {
-    flex: 1,
-  },
-  svgaStyle: {
-    width: 150,
-    height: 150,
-    marginTop: 30,
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    marginTop: 80,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+```javascript
+import { RNSvgaPlayer } from 'react-native-svga-player';
+<RNSvgaPlayer
+  style={{ width: 200, height: 200 }}
+  source={`https://raw.githubusercontent.com/yyued/SVGAPlayer-iOS/master/SVGAPlayer/Samples/Goddess.svga`}
+/>;
 ```
 
 更多详情用法参考 [三端 Svga 动画统一使用点击这里](https://github.com/yrjwcharm/react-native-ohos/tree/feature/rnoh/svgaplayer)
@@ -301,7 +223,7 @@ const arkTsComponentNames: Array<string> = [
   ];
 ```
 
-### 5.在 ArkTs 侧引入 WebViewPackage
+### 5.在 ArkTs 侧引入 SvgaPlayerPackage
 
 打开 `entry/src/main/ets/RNPackagesFactory.ts`，添加：
 
